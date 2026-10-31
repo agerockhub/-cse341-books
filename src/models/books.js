@@ -11,4 +11,13 @@ const getAllBooks = async () => {
     .toArray();
 };
 
-export { getAllBooks };
+// Retrieve a single book by its ID
+const getBookById = async (id) => {
+  const db = getDb();
+
+  return await db
+    .collection('books')
+    .findOne({ id: id });
+};
+
+export { getAllBooks, getBookById };
