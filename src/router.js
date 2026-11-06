@@ -1,3 +1,4 @@
+
 import express from 'express';
 
 import {
@@ -5,43 +6,27 @@ import {
   getBookByIdController
 } from './controllers/books.js';
 
+import {
+  getAllAuthorsController,
+  getAuthorByIdController,
+  createAuthorController,
+  updateAuthorController,
+  deleteAuthorController
+} from './controllers/authors.js';
+
 const router = express.Router();
 
-/**
- * @swagger
- * /books:
- *   get:
- *     summary: Retrieve all books
- *     description: Returns a list of all books in the database.
- *     responses:
- *       200:
- *         description: Successfully retrieved all books.
- *       500:
- *         description: Internal server error.
- */
-router.get('/books', getAllBooksController);
+// BOOKS ROUTES
 
-/**
- * @swagger
- * /books/{id}:
- *   get:
- *     summary: Retrieve a single book by ID
- *     description: Returns a book matching the provided ID.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The unique ID of the book.
- *         schema:
- *           type: string
- *     responses:
- *       200:
- *         description: Successfully retrieved the requested book.
- *       404:
- *         description: Book not found.
- *       500:
- *         description: Internal server error.
- */
+router.get('/books', getAllBooksController);
 router.get('/books/:id', getBookByIdController);
+
+// AUTHORS ROUTES
+
+router.get('/authors', getAllAuthorsController);
+router.get('/authors/:id', getAuthorByIdController);
+router.post('/authors', createAuthorController);
+router.put('/authors/:id', updateAuthorController);
+router.delete('/authors/:id', deleteAuthorController);
 
 export default router;
