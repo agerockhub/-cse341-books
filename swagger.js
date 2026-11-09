@@ -5,9 +5,9 @@ const options = {
   definition: {
     openapi: '3.0.0',
     info: {
-      title: 'Books API',
-      version: '1.0.0',
-      description: 'API documentation for the CSE 341 Books Web Service',
+      title: 'Books and Authors API',
+      version: '2.0.0',
+      description: 'API documentation for the CSE 341 Books and Authors Web Service.',
     },
     servers: [
       {
