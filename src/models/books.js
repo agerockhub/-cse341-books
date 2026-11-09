@@ -7,17 +7,58 @@ const getAllBooks = async () => {
 
   return await db
     .collection('books')
-    .find({})
+    .find({}, { projection: { _id: 0 } })
     .toArray();
 };
 
-// Retrieve a single book by its ID
+// Retrieve a single book by custom ID
 const getBookById = async (id) => {
   const db = getDb();
 
   return await db
     .collection('books')
-    .findOne({ id: id });
+    .findOne(
+      { id },
+      { projection: { _id: 0 } }
+    );
 };
 
-export { getAllBooks, getBookById };
+// Create a new book
+const createBook = async (book) => {
+  const db = getDb();
+
+  return await db
+    .collection('books')
+    .insertOne(book);
+};
+
+// Update an existing book
+const updateBook = async (id, book) => {
+  const db = getDb();
+
+  return await db
+    .collection('books')
+    .updateOne(
+      { id },
+      {
+        $set: book
+      }
+    );
+};
+
+// Delete a book
+const deleteBook = async (id) => {
+  const db = getDb();
+
+  return await db
+    .collection('books')
+    .deleteOne({ id });
+};
+
+export {
+  getAllBooks,
+  getBookById,
+  createBook,
+  updateBook,
+  deleteBook
+};
