@@ -7,7 +7,7 @@ const getAllAuthors = async () => {
 
   return await db
     .collection('authors')
-    .find({})
+    .find({}, { projection: { _id: 0 } })
     .toArray();
 };
 
@@ -17,16 +17,16 @@ const getAuthorById = async (id) => {
 
   return await db
     .collection('authors')
-    .findOne({ id: id });
+    .findOne(
+      { id },
+      { projection: { _id: 0 } }
+    );
 };
 
 // Create a new author
 const createAuthor = async (author) => {
   const db = getDb();
-
-  return await db
-    .collection('authors')
-    .insertOne(author);
+  return await db.collection('authors').insertOne(author);
 };
 
 // Update an existing author
@@ -47,7 +47,7 @@ const deleteAuthor = async (id) => {
 
   return await db
     .collection('authors')
-    .deleteOne({ id: id });
+   .deleteOne({ id })
 };
 
 export {

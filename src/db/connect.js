@@ -17,6 +17,22 @@ const connectToDb = async () => {
     process.env.MONGODB_DB_NAME || 'cse341-books-db'
   );
 
+  // Create indexes to enforce unique custom IDs
+await database.collection('books').createIndex(
+  { id: 1 },
+  { unique: true }
+);
+
+await database.collection('authors').createIndex(
+  { id: 1 },
+  { unique: true }
+);
+
+// Improve searches for books belonging to an author
+await database.collection('books').createIndex(
+  { authorId: 1 }
+);
+
   console.log('Connected to MongoDB');
 
   return database;
