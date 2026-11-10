@@ -15,7 +15,9 @@ const hasOnlyAllowedFields = (body, allowedFields) => {
     body &&
     typeof body === 'object' &&
     !Array.isArray(body) &&
-    Object.keys(body).every((key) => allowedFields.includes(key))
+    Object.keys(body).every((key) => {
+      return allowedFields.includes(key);
+    })
   );
 };
 

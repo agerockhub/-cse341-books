@@ -19,9 +19,9 @@ const hasOnlyAllowedFields = (body, allowedFields) => {
     return false;
   }
 
-  return Object.keys(body).every((field) =>
-    allowedFields.includes(field)
-  );
+  return Object.keys(body).every((field) => {
+    return allowedFields.includes(field);
+  });
 };
 
 // Validate book information
